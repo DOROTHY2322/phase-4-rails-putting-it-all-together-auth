@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
         recipe = current_user.recipes.build(recipe_params)
       
         if recipe.save
-          render json: recipe.as_json(include: { user: { only: [:name, :email] } }), status: :created
+          render json: recipe.as_json(include: { user: { only: [:username, :image_url, :bio] } }), status: :created
         else
           render json: { errors: recipe.errors.full_messages }, status: :unprocessable_entity
         end
@@ -45,7 +45,7 @@ class RecipesController < ApplicationController
 
   end
   def recipe_params
-    params.permit(:title, :instructions, :minutes_to_complete)
+    params.permit(:title,:instructions, :minutes_to_complete)
   end
   
   end
